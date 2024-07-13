@@ -14,9 +14,9 @@ public class JobApplicationPage {
     WebDriver driver;
     WebDriverWait wait;
     
-    // Corrected selector for Job Description link
-    By jobDescription = By.xpath("//a[@href='https://pf.com.pk/job/software-engineering/']//p[contains(text(),'Apply')]");
-    By fullName = By.id("name");
+    // Selectors
+  
+    By fullName = By.xpath("//input[@id='name']");
     By dateOfBirth = By.id("dob");
     By email = By.id("email");
     By cnic = By.id("cnic");
@@ -43,11 +43,11 @@ public class JobApplicationPage {
     }
 
     public void fillJobApplicationForm(String name, String dob, String email, String cnic, String phone, String address, String city, 
-            String qualification, String yearOfCompletion, String university, String cgpa, String currentSalary, 
+            String qualification, String yearOfCompletion, String university, String cgpa,
             String expectedSalary, String doj, String hearAboutUs, String experience, String resumePath) {
         
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(jobDescription)).click();
+            //wait.until(ExpectedConditions.elementToBeClickable(selectForm)).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(fullName)).sendKeys(name);
             driver.findElement(dateOfBirth).sendKeys(dob);
             driver.findElement(this.email).sendKeys(email);
@@ -60,13 +60,10 @@ public class JobApplicationPage {
             driver.findElement(this.university).sendKeys(university);
             driver.findElement(this.cgpa).sendKeys(cgpa);
 
-            // Ensure the radio button is not already selected
-            WebElement currentlyWorkingNoRadio = driver.findElement(currentlyWorkingNo);
-            if (!currentlyWorkingNoRadio.isSelected()) {
-                currentlyWorkingNoRadio.click();
-            }
+            // Radio button
+            driver.findElement(currentlyWorkingNo).click();
 
-            driver.findElement(this.currentSalary).sendKeys(currentSalary);
+            //driver.findElement(this.currentSalary).sendKeys(currentSalary);
             driver.findElement(this.expectedSalary).sendKeys(expectedSalary);
             driver.findElement(this.expectedDateOfJoining).sendKeys(doj);
             driver.findElement(this.hearAboutUs).sendKeys(hearAboutUs);

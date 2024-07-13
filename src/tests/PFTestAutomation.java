@@ -10,10 +10,10 @@ import java.io.IOException;
 
 public class PFTestAutomation {
     public static void main(String[] args) {
-        // Set the path for the ChromeDriver
+        
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Great1\\Desktop\\SeleniumDrivers\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 
-        // Initialize ChromeDriver
+       
         ChromeOptions options = new ChromeOptions();
         WebDriver driver = new ChromeDriver(options);
 
@@ -40,7 +40,9 @@ public class PFTestAutomation {
 
             // Click on Apply Now button
             homePage.clickApplyNow();
-            homePage.scrollToBottom();
+           // homePage.scrollToBottom();
+            homePage.clickApplyJobButton();
+            homePage.clickOnApply();
 
             // Fill the form for one position in available jobs
             jobApplicationPage.fillJobApplicationForm(
@@ -51,11 +53,11 @@ public class PFTestAutomation {
                 "1234567890",
                 "DHA Lahore 123 street",
                 "Lahore",
-                "BS Software Engineering",
+                "BSSE",
                 "2016",
                 "Punjab University",
                 "3.5",
-                "50000",
+                //"50000",
                 "70000",
                 "2024-07-15",
                 "LinkedIn",
@@ -63,7 +65,7 @@ public class PFTestAutomation {
                 "C:\\Users\\Great1\\Desktop\\SeleniumDrivers\\Resume_Momina.pdf"
             );
 
-            // Submit the form
+            // Submit form
             jobApplicationPage.submitForm();
             
             // Display success message
@@ -72,7 +74,7 @@ public class PFTestAutomation {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            // Close the browser
+            
             driver.quit();
         }
     }

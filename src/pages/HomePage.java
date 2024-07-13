@@ -26,6 +26,8 @@ public class HomePage {
     By logo = By.xpath("//img[@class='home-logo lazyloaded']");
     By headerLinks = By.cssSelector("a[href='/about-us']");
     By applyNowButton = By.cssSelector("li[id='menu-item-16'] a");
+    By applyJobButton = By.xpath("//a[@href='https://pf.com.pk/job/senior-and-mid-level-backend-developer/']//p[@class='apply-m-now'][normalize-space()='Apply']");
+   // By Apply = By.xpath("//a[@class='single-apply-now']");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -88,9 +90,51 @@ public class HomePage {
     public void clickApplyNow() {
         try {
             WebElement applyNowBtn = wait.until(ExpectedConditions.elementToBeClickable(applyNowButton));
-            applyNowBtn.click();
+            // Scroll to the Apply Now button
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", applyNowBtn);
+            Thread.sleep(500); // Adding a small delay to let the scrolling finish
+
+            // Click the Apply Now button using JavaScript
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", applyNowBtn);
+
+            
+           // clickApplyJobButton();
+
         } catch (Exception e) {
-            System.out.println("Apply Now button not found: " + e.getMessage());
+            System.out.println("Apply Now button not found or not clickable: " + e.getMessage());
+        }
+    }
+ // After clicking Apply Now, click Apply job button
+    
+    public void clickApplyJobButton() {
+        try {
+            WebElement applyJobBtn = wait.until(ExpectedConditions.elementToBeClickable(applyJobButton));
+            // Scroll to the Apply job button
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", applyJobBtn);
+            Thread.sleep(500); // Adding a small delay to let the scrolling finish
+
+            // Click the Apply job button using JavaScript
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", applyJobBtn);
+
+        } catch (Exception e) {
+            System.out.println("Apply job button not found or not clickable: " + e.getMessage());
+        }
+    }
+
+    public void clickOnApply() {
+        try {
+            WebElement applyButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@class='single-apply-now']")));
+            // Scroll to the Apply button
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", applyButton);
+            Thread.sleep(500); // Adding a small delay to let the scrolling finish
+
+            // Click the Apply button using JavaScript
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", applyButton);
+
+        } catch (Exception e) {
+            System.out.println("Apply button not found or not clickable: " + e.getMessage());
         }
     }
 }
+
+    
